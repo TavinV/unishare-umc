@@ -24,9 +24,7 @@
 -- 1 e 2. Criacao do banco e das tabelas
 -- ---------------------------------------------------------------------
 
-CREATE DATABASE unishare
-  DEFAULT CHARACTER SET utf8mb4
-  DEFAULT COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE unishare;
 
 USE unishare;
 

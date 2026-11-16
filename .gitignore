@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.bak
+config.chc
+autosave.chc
+.DS_Store
+Thumbs.db

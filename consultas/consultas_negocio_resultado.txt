@@ -1,0 +1,307 @@
++---------------------------+---------------------+-------------+------------+----------------+---------------------+---------------------+-------------+-------------+
+| equipamento               | solicitante         | data_inicio | data_fim   | status_reserva | retirada            | devolucao           | dias_atraso | valor_total |
++---------------------------+---------------------+-------------+------------+----------------+---------------------+---------------------+-------------+-------------+
+| Notebook Dell Inspiron 15 | Otávio Freitas      | 2026-08-21  | 2026-08-22 | CONCLUIDA      | 2026-08-21 09:47:00 | 2026-08-22 17:37:00 |           0 |       25.00 |
+| Notebook Dell Inspiron 15 | Gabriela Nunes      | 2026-08-29  | 2026-08-30 | CONCLUIDA      | 2026-08-29 10:21:00 | 2026-08-30 16:00:00 |           0 |       25.00 |
+| Notebook Dell Inspiron 15 | Bruno Henrique Lima | 2026-10-11  | 2026-10-14 | CONCLUIDA      | 2026-10-11 09:52:00 | 2026-10-14 17:08:00 |           0 |       90.00 |
+| Notebook Dell Inspiron 15 | Paula Vieira        | 2026-10-18  | 2026-10-22 | CONCLUIDA      | 2026-10-18 09:53:00 | 2026-10-22 18:36:00 |           0 |      120.00 |
++---------------------------+---------------------+-------------+------------+----------------+---------------------+---------------------+-------------+-------------+
++------------------------------+------------+----------------------+-------------+-------------+
+| categoria                    | devolucoes | media_dias_com_aluno | minimo_dias | maximo_dias |
++------------------------------+------------+----------------------+-------------+-------------+
+| Drone                        |          2 |                  5.2 |         3.0 |         7.4 |
+| Câmera fotográfica           |         13 |                  4.7 |         2.2 |         7.4 |
+| Equipamento de áudio         |         11 |                  4.7 |         1.2 |         8.1 |
+| Acessórios de foto e vídeo   |         12 |                  4.6 |         1.3 |         7.1 |
+| Notebook                     |         19 |                  4.4 |         1.2 |         7.3 |
+| Tablet                       |          8 |                  3.8 |         1.3 |         5.3 |
+| Mesa digitalizadora          |          3 |                  3.8 |         1.2 |         7.0 |
+| Projetor                     |          6 |                  3.6 |         1.3 |         7.3 |
+| Kit eletrônico               |          7 |                  3.4 |         1.3 |         6.3 |
+| Calculadora                  |          3 |                  1.9 |         1.3 |         2.3 |
++------------------------------+------------+----------------------+-------------+-------------+
++---------------------+--------------------------+----------------------+-----------+-----------+
+| tipo_proprietario   | solicitacoes_respondidas | media_horas_resposta | aprovadas | recusadas |
++---------------------+--------------------------+----------------------+-----------+-----------+
+| UMC (institucional) |                       34 |                 12.9 |        29 |         5 |
+| Aluno proprietario  |                       77 |                 13.4 |        66 |        11 |
++---------------------+--------------------------+----------------------+-----------+-----------+
++-------------------------------------+------------------------------+----------+-----------------+---------+
+| equipamento                         | categoria                    | reservas | dias_reservados | posicao |
++-------------------------------------+------------------------------+----------+-----------------+---------+
+| Kit Arduino Uno Avançado            | Kit eletrônico               |        5 |              17 |       1 |
+| Câmera Canon EOS Rebel T7           | Câmera fotográfica           |        4 |              22 |       2 |
+| Lente Canon EF 50mm f/1.8           | Acessórios de foto e vídeo   |        4 |              19 |       2 |
+| Câmera Sony ZV-E10                  | Câmera fotográfica           |        4 |              16 |       2 |
+| Notebook Samsung Book               | Notebook                     |        4 |              16 |       2 |
+| Notebook Dell Latitude 3420         | Notebook                     |        4 |              15 |       2 |
+| Interface de áudio Behringer UMC22  | Equipamento de áudio         |        4 |              14 |       2 |
+| iPad 9ª geração                     | Tablet                       |        4 |              13 |       2 |
+| Notebook Lenovo ThinkPad E14        | Notebook                     |        4 |              13 |       2 |
+| Mesa digitalizadora Wacom One       | Mesa digitalizadora          |        4 |              12 |       2 |
++-------------------------------------+------------------------------+----------+-----------------+---------+
++---------------------+-----------------------+----------+---------------+--------------+
+| proprietario        | equipamentos_alugados | alugueis | receita_total | ticket_medio |
++---------------------+-----------------------+----------+---------------+--------------+
+| Felipe Santos       |                     2 |        8 |       1120.00 |       140.00 |
+| Diego Martins       |                     1 |        4 |        880.00 |       220.00 |
+| Eduarda Rocha       |                     2 |        4 |        695.00 |       173.75 |
+| Bruno Henrique Lima |                     2 |        4 |        612.00 |       153.00 |
+| Rodrigo Teixeira    |                     1 |        2 |        540.00 |       270.00 |
+| João Pedro Ribeiro  |                     2 |        7 |        517.00 |        73.86 |
+| Isabela Carvalho    |                     1 |        4 |        352.00 |        88.00 |
+| Ana Beatriz Souza   |                     1 |        4 |        260.00 |        65.00 |
+| Lucas Almeida       |                     1 |        3 |        225.00 |        75.00 |
+| Paula Vieira        |                     1 |        4 |        140.00 |        35.00 |
+| Mariana Costa       |                     1 |        3 |        132.00 |        44.00 |
+| Camila Ferreira     |                     1 |        3 |        106.00 |        35.33 |
++---------------------+-----------------------+----------+---------------+--------------+
++---------------------+--------+------------------------+-----------+-----------+-----------+--------------------+
+| proprietario        | perfil | solicitacoes_recebidas | aprovadas | recusadas | expiradas | taxa_aprovacao_pct |
++---------------------+--------+------------------------+-----------+-----------+-----------+--------------------+
+| Paula Vieira        | ALUNO  |                      4 |         4 |         0 |         0 |              100.0 |
+| Isabela Carvalho    | ALUNO  |                      9 |         8 |         1 |         0 |               88.9 |
+| Ana Beatriz Souza   | ALUNO  |                      8 |         6 |         2 |         0 |               75.0 |
+| Camila Ferreira     | ALUNO  |                      8 |         6 |         1 |         0 |               75.0 |
+| Diego Martins       | ALUNO  |                      8 |         6 |         1 |         0 |               75.0 |
+| Mariana Costa       | ALUNO  |                      4 |         3 |         1 |         0 |               75.0 |
+| Felipe Santos       | ALUNO  |                     11 |         8 |         3 |         0 |               72.7 |
+| Vinícius Batista    | ALUNO  |                      3 |         2 |         0 |         1 |               66.7 |
+| Ricardo Alves       | ADM    |                     15 |         9 |         3 |         1 |               60.0 |
+| Otávio Freitas      | ALUNO  |                      5 |         3 |         1 |         0 |               60.0 |
+| João Pedro Ribeiro  | ALUNO  |                     12 |         7 |         3 |         1 |               58.3 |
+| Carla Mendes        | ADM    |                     19 |        11 |         6 |         0 |               57.9 |
+| Eduarda Rocha       | ALUNO  |                      7 |         4 |         3 |         0 |               57.1 |
+| Bruno Henrique Lima | ALUNO  |                      7 |         4 |         2 |         1 |               57.1 |
+| Pablo Chagas        | ADM    |                     16 |         9 |         5 |         1 |               56.3 |
+| Lucas Almeida       | ALUNO  |                      6 |         3 |         1 |         0 |               50.0 |
+| Rodrigo Teixeira    | ALUNO  |                      4 |         2 |         2 |         0 |               50.0 |
++---------------------+--------+------------------------+-----------+-----------+-----------+--------------------+
++---------------------+----------------------+-----------+----------------------+
+| aluno               | avaliacoes_recebidas | reputacao | avaliacoes_negativas |
++---------------------+----------------------+-----------+----------------------+
+| Paula Vieira        |                    5 |      5.00 |                    0 |
+| Helena Moura        |                    2 |      5.00 |                    0 |
+| Gustavo Rezende     |                    2 |      5.00 |                    0 |
+| André Fonseca       |                    2 |      5.00 |                    0 |
+| Yasmin Correia      |                    1 |      5.00 |                    0 |
+| Fernanda Castro     |                    1 |      5.00 |                    0 |
+| Natália Barbosa     |                    1 |      5.00 |                    0 |
+| Matheus Pereira     |                    1 |      5.00 |                    0 |
+| Ana Beatriz Souza   |                    5 |      4.80 |                    0 |
+| Felipe Santos       |                    5 |      4.80 |                    0 |
+| João Pedro Ribeiro  |                    5 |      4.80 |                    0 |
+| Rafael Moreira      |                    4 |      4.75 |                    0 |
+| Diego Martins       |                    4 |      4.75 |                    0 |
+| Daniela Pinto       |                    4 |      4.75 |                    0 |
+| Lucas Almeida       |                    4 |      4.75 |                    0 |
+| Vanessa Araújo      |                    3 |      4.67 |                    0 |
+| Thiago Monteiro     |                    2 |      4.50 |                    0 |
+| Mariana Costa       |                    2 |      4.50 |                    0 |
+| Rodrigo Teixeira    |                    5 |      4.40 |                    0 |
+| Bruno Henrique Lima |                    5 |      4.40 |                    0 |
+| Isabela Carvalho    |                    9 |      4.33 |                    0 |
+| Eduarda Rocha       |                    6 |      4.00 |                    1 |
+| Vinícius Batista    |                    2 |      4.00 |                    0 |
+| Gabriela Nunes      |                    2 |      4.00 |                    0 |
+| Camila Ferreira     |                    5 |      3.80 |                    0 |
+| Otávio Freitas      |                    4 |      3.50 |                    1 |
+| Beatriz Duarte      |                    2 |      3.00 |                    1 |
+| Sabrina Lopes       |                    1 |      2.00 |                    1 |
+| Caio Ramos          |                    2 |      1.50 |                    2 |
++---------------------+----------------------+-----------+----------------------+
++---------------------+-------------+----------------------+-------------------+--------------+
+| aluno               | matricula   | devolucoes_atrasadas | media_dias_atraso | maior_atraso |
++---------------------+-------------+----------------------+-------------------+--------------+
+| Isabela Carvalho    | 11240001296 |                    2 |               2.0 |            3 |
+| Caio Ramos          | 11240001999 |                    1 |               3.0 |            3 |
+| André Fonseca       | 11240001925 |                    1 |               3.0 |            3 |
+| Bruno Henrique Lima | 11240001037 |                    1 |               2.0 |            2 |
+| Beatriz Duarte      | 11240001962 |                    1 |               1.0 |            1 |
+| Eduarda Rocha       | 11240001148 |                    1 |               1.0 |            1 |
+| Natália Barbosa     | 11240001518 |                    1 |               1.0 |            1 |
+| Otávio Freitas      | 11240001555 |                    1 |               1.0 |            1 |
++---------------------+-------------+----------------------+-------------------+--------------+
++------------------------------+-------+------------+-----------+-------------------+-------+
+| categoria                    | danos | resolvidos | em_aberto | media_dias_reparo | fotos |
++------------------------------+-------+------------+-----------+-------------------+-------+
+| Acessórios de foto e vídeo   |     4 |          4 |         0 |               8.4 |     9 |
+| Equipamento de áudio         |     2 |          2 |         0 |              10.7 |     3 |
+| Notebook                     |     2 |          0 |         2 |              NULL |     3 |
+| Projetor                     |     1 |          0 |         1 |              NULL |     1 |
+| Tablet                       |     1 |          1 |         0 |               9.0 |     1 |
+| Kit eletrônico               |     1 |          1 |         0 |               8.9 |     2 |
++------------------------------+-------+------------+-----------+-------------------+-------+
++--------------------------------+------------------+------------------------------------------------------------+------------------+---------------------+-------------+------------------+
+| equipamento                    | proprietario     | descricao                                                  | status_andamento | registrado_em       | dias_parado | relatado_por     |
++--------------------------------+------------------+------------------------------------------------------------+------------------+---------------------+-------------+------------------+
+| Projetor portátil LG CineBeam  | Pablo Chagas     | Carcaça trincada após queda, funcionando parcialmente.     | EM_REPARO        | 2026-08-20 17:52:00 |          69 | Pablo Chagas     |
+| Notebook Samsung Book          | Isabela Carvalho | Botão de liga e desliga afundado, aciona com dificuldade.  | EM_REPARO        | 2026-09-24 18:59:00 |          34 | Isabela Carvalho |
+| Notebook Acer Aspire 5         | Camila Ferreira  | Entrada USB com mau contato durante o uso.                 | EM_REPARO        | 2026-10-17 13:39:00 |          11 | Mariana Costa    |
++--------------------------------+------------------+------------------------------------------------------------+------------------+---------------------+-------------+------------------+
++---------------------------------------+----------------+-----------------+--------------+
+| equipamento                           | dias_ofertados | dias_reservados | ocupacao_pct |
++---------------------------------------+----------------+-----------------+--------------+
+| Câmera Canon EOS Rebel T7             |             64 |              22 |         34.4 |
+| Câmera GoPro Hero 10                  |             45 |              15 |         33.3 |
+| Notebook Samsung Book                 |             54 |              16 |         29.6 |
+| Interface de áudio Behringer UMC22    |             55 |              14 |         25.5 |
+| MacBook Air M1                        |             47 |              12 |         25.5 |
+| Câmera Sony ZV-E10                    |             52 |              13 |         25.0 |
+| Caixa de som JBL Flip 5               |             71 |              17 |         23.9 |
+| Lente Canon EF 50mm f/1.8             |             63 |              15 |         23.8 |
+| Drone DJI Mini 2                      |             38 |               9 |         23.7 |
+| iPad 9ª geração                       |             55 |              13 |         23.6 |
+| Notebook Acer Aspire 5                |             73 |              17 |         23.3 |
+| Mesa digitalizadora Wacom One         |             54 |              12 |         22.2 |
+| Kit Arduino Uno Avançado              |             80 |              17 |         21.3 |
+| Ring light 18 polegadas               |             77 |              14 |         18.2 |
+| Tripé Velbon EX-440                   |             39 |               7 |         17.9 |
+| Microfone Rode NT-USB                 |             73 |              13 |         17.8 |
+| Notebook Dell Latitude 3420           |             80 |              14 |         17.5 |
+| Notebook Lenovo ThinkPad E14          |             80 |              13 |         16.3 |
+| Tablet Lenovo Tab M10                 |             50 |               8 |         16.0 |
+| Projetor Epson PowerLite X49          |             80 |              11 |         13.8 |
+| Projetor Samsung Freestyle            |             53 |               7 |         13.2 |
+| Notebook Dell Inspiron 15             |             71 |               9 |         12.7 |
+| Tablet Samsung Galaxy Tab S6 Lite     |             80 |              10 |         12.5 |
+| Tripé Manfrotto com iluminação LED    |             80 |              10 |         12.5 |
+| Calculadora Casio fx-991ES Plus       |             57 |               7 |         12.3 |
+| Câmera Nikon D3500                    |             80 |               9 |         11.3 |
+| Fone Sony WH-1000XM4                  |             54 |               5 |          9.3 |
+| Calculadora HP 50g                    |             60 |               4 |          6.7 |
+| Kit Raspberry Pi 4                    |             60 |               4 |          6.7 |
+| Projetor portátil LG CineBeam         |             80 |               2 |          2.5 |
++---------------------------------------+----------------+-----------------+--------------+
++---------+-------+-----------+-----------+------------+-----------+-----------+
+| mes     | total | aprovadas | recusadas | canceladas | expiradas | pendentes |
++---------+-------+-----------+-----------+------------+-----------+-----------+
+| 2026-08 |    23 |        16 |         5 |          1 |         1 |         0 |
+| 2026-09 |    67 |        45 |        15 |          5 |         2 |         0 |
+| 2026-10 |    56 |        34 |        15 |          0 |         2 |         5 |
++---------+-------+-----------+-----------+------------+-----------+-----------+
++------------------------------+--------+------------+--------------+----------------+-------------+------------+--------------+
+| equipamento                  | versao | modalidade | valor_diaria | valor_anterior | data_inicio | data_fim   | variacao_pct |
++------------------------------+--------+------------+--------------+----------------+-------------+------------+--------------+
+| Câmera Sony ZV-E10           |      1 | ALUGUEL    |        50.00 |           NULL | 2026-09-07  | 2026-10-06 |         NULL |
+| Câmera Sony ZV-E10           |      2 | ALUGUEL    |        60.00 |          50.00 | 2026-10-07  | 2026-12-18 |         20.0 |
+| Fone Sony WH-1000XM4         |      1 | ALUGUEL    |        12.00 |           NULL | 2026-08-29  | 2026-10-03 |         NULL |
+| Fone Sony WH-1000XM4         |      2 | ALUGUEL    |        12.00 |          12.00 | 2026-10-11  | 2026-12-12 |          0.0 |
+| Kit Raspberry Pi 4           |      1 | ALUGUEL    |        18.00 |           NULL | 2026-08-16  | 2026-09-15 |         NULL |
+| Kit Raspberry Pi 4           |      2 | ALUGUEL    |        18.00 |          18.00 | 2026-09-30  | 2026-12-12 |          0.0 |
+| Lente Canon EF 50mm f/1.8    |      1 | ALUGUEL    |        20.00 |           NULL | 2026-08-27  | 2026-09-30 |         NULL |
+| Lente Canon EF 50mm f/1.8    |      2 | ALUGUEL    |        16.00 |          20.00 | 2026-10-01  | 2026-12-18 |        -20.0 |
+| MacBook Air M1               |      1 | ALUGUEL    |        45.00 |           NULL | 2026-08-31  | 2026-10-03 |         NULL |
+| MacBook Air M1               |      2 | ALUGUEL    |        45.00 |          45.00 | 2026-10-16  | 2026-12-12 |          0.0 |
+| Microfone Rode NT-USB        |      1 | ALUGUEL    |        15.00 |           NULL | 2026-08-17  | 2026-09-24 |         NULL |
+| Microfone Rode NT-USB        |      2 | ALUGUEL    |        18.00 |          15.00 | 2026-09-25  | 2026-12-18 |         20.0 |
+| Notebook Dell Inspiron 15    |      1 | ALUGUEL    |        25.00 |           NULL | 2026-08-19  | 2026-10-05 |         NULL |
+| Notebook Dell Inspiron 15    |      2 | ALUGUEL    |        30.00 |          25.00 | 2026-10-06  | 2026-12-18 |         20.0 |
+| Notebook Dell Latitude 3420  |      1 | EMPRESTIMO |         0.00 |           NULL | 2026-08-10  | 2026-09-23 |         NULL |
+| Notebook Dell Latitude 3420  |      2 | EMPRESTIMO |         0.00 |           0.00 | 2026-09-24  | 2026-12-15 |         NULL |
+| Projetor Epson PowerLite X49 |      1 | EMPRESTIMO |         0.00 |           NULL | 2026-08-10  | 2026-09-20 |         NULL |
+| Projetor Epson PowerLite X49 |      2 | EMPRESTIMO |         0.00 |           0.00 | 2026-09-21  | 2026-12-15 |         NULL |
+| Ring light 18 polegadas      |      1 | ALUGUEL    |         8.00 |           NULL | 2026-08-13  | 2026-09-27 |         NULL |
+| Ring light 18 polegadas      |      2 | ALUGUEL    |         7.00 |           8.00 | 2026-09-28  | 2026-12-18 |        -12.5 |
+| Tablet Lenovo Tab M10        |      1 | ALUGUEL    |        15.00 |           NULL | 2026-08-31  | 2026-10-02 |         NULL |
+| Tablet Lenovo Tab M10        |      2 | ALUGUEL    |        15.00 |          15.00 | 2026-10-12  | 2026-12-12 |          0.0 |
+| Tripé Velbon EX-440          |      1 | EMPRESTIMO |         0.00 |           NULL | 2026-09-14  | 2026-10-22 |         NULL |
+| Tripé Velbon EX-440          |      2 | ALUGUEL    |        10.00 |           0.00 | 2026-11-03  | 2026-12-12 |         NULL |
++------------------------------+--------+------------+--------------+----------------+-------------+------------+--------------+
++-------------+------------+-------------------------------------+---------------------+------------+---------------------+---------------+
+| data_inicio | data_fim   | equipamento                         | solicitante         | status     | proprietario        | institucional |
++-------------+------------+-------------------------------------+---------------------+------------+---------------------+---------------+
+| 2026-10-22  | 2026-10-29 | Calculadora Casio fx-991ES Plus     | Felipe Santos       | EM_USO     | Ana Beatriz Souza   | NAO           |
+| 2026-10-25  | 2026-10-28 | Interface de áudio Behringer UMC22  | Vinícius Batista    | EM_USO     | Paula Vieira        | NAO           |
+| 2026-10-25  | 2026-10-29 | Notebook Dell Latitude 3420         | João Pedro Ribeiro  | EM_USO     | Carla Mendes        | SIM           |
+| 2026-10-25  | 2026-10-31 | Câmera Sony ZV-E10                  | Natália Barbosa     | EM_USO     | Felipe Santos       | NAO           |
+| 2026-10-25  | 2026-10-31 | Tablet Lenovo Tab M10               | Rodrigo Teixeira    | EM_USO     | João Pedro Ribeiro  | NAO           |
+| 2026-10-26  | 2026-10-28 | Mesa digitalizadora Wacom One       | Lucas Almeida       | EM_USO     | Felipe Santos       | NAO           |
+| 2026-10-26  | 2026-10-27 | Notebook Lenovo ThinkPad E14        | Vinícius Batista    | ATRASADA   | Carla Mendes        | SIM           |
+| 2026-10-27  | 2026-10-29 | Câmera Nikon D3500                  | Felipe Santos       | EM_USO     | Ricardo Alves       | SIM           |
+| 2026-10-29  | 2026-11-04 | Fone Sony WH-1000XM4                | Diego Martins       | CONFIRMADA | Mariana Costa       | NAO           |
+| 2026-10-29  | 2026-11-02 | Tablet Samsung Galaxy Tab S6 Lite   | Diego Martins       | CONFIRMADA | Carla Mendes        | SIM           |
+| 2026-10-30  | 2026-11-03 | Lente Canon EF 50mm f/1.8           | Gustavo Rezende     | CONFIRMADA | João Pedro Ribeiro  | NAO           |
++-------------+------------+-------------------------------------+---------------------+------------+---------------------+---------------+
++---------------------+--------------+-----------+----------------+-------------------------+
+| aluno               | solicitacoes | aprovadas | gasto_simulado | equipamentos_diferentes |
++---------------------+--------------+-----------+----------------+-------------------------+
+| Bruno Henrique Lima |            7 |         4 |         140.00 |                       5 |
+| Vanessa Araújo      |            7 |         4 |          93.00 |                       6 |
+| Daniela Pinto       |            7 |         4 |         120.00 |                       7 |
+| Vinícius Batista    |            6 |         5 |          30.00 |                       6 |
+| Rafael Moreira      |            6 |         5 |          22.00 |                       6 |
+| Helena Moura        |            6 |         3 |         222.00 |                       6 |
+| Felipe Santos       |            6 |         5 |         100.00 |                       6 |
+| Gabriela Nunes      |            6 |         4 |         305.00 |                       5 |
+| Yasmin Correia      |            6 |         3 |         250.00 |                       4 |
+| João Pedro Ribeiro  |            5 |         3 |          24.00 |                       5 |
++---------------------+--------------+-----------+----------------+-------------------------+
++----------------------------------------+--------+------------------------+--------------+----------+
+| curso                                  | alunos | alunos_que_solicitaram | solicitacoes | reservas |
++----------------------------------------+--------+------------------------+--------------+----------+
+| Engenharia de Software                 |      7 |                      7 |           33 |       21 |
+| Administração                          |      6 |                      6 |           28 |       19 |
+| Arquitetura e Urbanismo                |      5 |                      4 |           23 |       16 |
+| Engenharia Civil                       |      5 |                      4 |           19 |       14 |
+| Análise e Desenvolvimento de Sistemas  |      4 |                      4 |           17 |       12 |
+| Design Gráfico                         |      5 |                      5 |           20 |       12 |
+| Ciência da Computação                  |      4 |                      4 |           18 |       10 |
+| Sistemas de Informação                 |      6 |                      5 |           17 |        9 |
++----------------------------------------+--------+------------------------+--------------+----------+
++---------------+-----------------------+-----------+-----------+---------------------+
+| analista      | documentos_analisados | aprovados | recusados | media_horas_analise |
++---------------+-----------------------+-----------+-----------+---------------------+
+| Juliana Prado |                    19 |        17 |         2 |                22.5 |
+| Ricardo Alves |                     9 |         8 |         1 |                21.9 |
+| Carla Mendes  |                     8 |         8 |         0 |                23.0 |
++---------------+-----------------------+-----------+-----------+---------------------+
++---------------------+----------------+----------------+------------+----------------+--------------+
+| data_hora           | tipo_operacao  | tabela_afetada | id_afetado | usuario        | endereco_ip  |
++---------------------+----------------+----------------+------------+----------------+--------------+
+| 2026-08-15 21:15:00 | SOLICITACAO    | solicitacao    |          4 | Yasmin Correia | 203.0.113.97 |
+| 2026-08-16 07:00:00 | APROVACAO      | solicitacao    |          4 | Pablo Chagas   | 203.0.113.13 |
+| 2026-08-16 09:54:00 | RETIRADA       | retirada       |          2 | Pablo Chagas   | 192.0.2.21   |
+| 2026-08-20 15:06:00 | DEVOLUCAO      | devolucao      |          2 | Pablo Chagas   | 192.0.2.21   |
+| 2026-08-20 15:25:00 | REGISTRO_DANO  | dano           |          1 | Pablo Chagas   | 192.0.2.21   |
+| 2026-08-31 17:59:00 | RESOLUCAO_DANO | dano           |          1 | Pablo Chagas   | 192.0.2.21   |
++---------------------+----------------+----------------+------------+----------------+--------------+
++---------------------+--------+--------------+--------+------------------+---------------------+----------------+
+| nome                | perfil | status_conta | logins | logins_com_falha | ultimo_login        | ips_diferentes |
++---------------------+--------+--------------+--------+------------------+---------------------+----------------+
+| Beatriz Duarte      | ALUNO  | BLOQUEADA    |      9 |                5 | 2026-10-09 10:11:00 |              1 |
+| Eduarda Rocha       | ALUNO  | ATIVA        |     23 |                1 | 2026-10-19 17:09:00 |              2 |
+| Mariana Costa       | ALUNO  | ATIVA        |     13 |                1 | 2026-10-24 08:02:00 |              2 |
+| Carla Mendes        | ADM    | ATIVA        |     37 |                0 | 2026-10-26 10:16:00 |              2 |
+| João Pedro Ribeiro  | ALUNO  | ATIVA        |     32 |                0 | 2026-10-27 20:30:00 |              2 |
+| Pablo Chagas        | ADM    | ATIVA        |     31 |                0 | 2026-10-25 13:35:00 |              2 |
+| Felipe Santos       | ALUNO  | ATIVA        |     31 |                0 | 2026-10-26 09:14:00 |              2 |
+| Isabela Carvalho    | ALUNO  | ATIVA        |     30 |                0 | 2026-10-26 18:23:00 |              2 |
+| Ricardo Alves       | ADM    | ATIVA        |     29 |                0 | 2026-10-27 10:54:00 |              2 |
+| Bruno Henrique Lima | ALUNO  | ATIVA        |     29 |                0 | 2026-10-23 15:42:00 |              2 |
+| Camila Ferreira     | ALUNO  | ATIVA        |     29 |                0 | 2026-10-26 21:11:00 |              2 |
+| Diego Martins       | ALUNO  | ATIVA        |     25 |                0 | 2026-11-02 20:31:00 |              2 |
+| Ana Beatriz Souza   | ALUNO  | ATIVA        |     24 |                0 | 2026-10-23 12:33:00 |              2 |
+| Paula Vieira        | ALUNO  | ATIVA        |     23 |                0 | 2026-10-26 20:13:00 |              2 |
+| Lucas Almeida       | ALUNO  | ATIVA        |     23 |                0 | 2026-10-24 08:16:00 |              2 |
++---------------------+--------+--------------+--------+------------------+---------------------+----------------+
++---------------------+--------------+----------+------------------------+-------+------------------------+
+| origem              | equipamentos | reservas | media_dias_por_reserva | danos | danos_por_100_reservas |
++---------------------+--------------+----------+------------------------+-------+------------------------+
+| Institucional (UMC) |            8 |       29 |                    3.2 |     4 |                   13.8 |
+| De alunos           |           22 |       66 |                    4.1 |     7 |                   10.6 |
++---------------------+--------------+----------+------------------------+-------+------------------------+
++---------------------+-----------+--------------------------------------------+---------------------+
+| usuario             | nao_lidas | tipos                                      | mais_antiga         |
++---------------------+-----------+--------------------------------------------+---------------------+
+| Camila Ferreira     |         2 | SOLICITACAO_RECEBIDA, SOLICITACAO_RECUSADA | 2026-10-27 20:15:00 |
+| João Pedro Ribeiro  |         1 | SOLICITACAO_RECEBIDA                       | 2026-10-27 14:34:00 |
+| Gustavo Rezende     |         1 | CONFIRMACAO_RESERVA                        | 2026-10-27 20:32:00 |
++---------------------+-----------+--------------------------------------------+---------------------+
++-----------------+------------------------------+-------------+--------------+---------------------+
+| nome            | email                        | matricula   | status_conta | criado_em           |
++-----------------+------------------------------+-------------+--------------+---------------------+
+| Igor Tavares    | igor.tavares@aluno.umc.br    | 11240002221 | PENDENTE     | 2026-10-19 12:33:00 |
+| Jéssica Campos  | jessica.campos@aluno.umc.br  | 11240002258 | PENDENTE     | 2026-10-24 13:05:00 |
+| Leonardo Farias | leonardo.farias@aluno.umc.br | 11240002295 | PENDENTE     | 2026-10-26 12:53:00 |
++-----------------+------------------------------+-------------+--------------+---------------------+

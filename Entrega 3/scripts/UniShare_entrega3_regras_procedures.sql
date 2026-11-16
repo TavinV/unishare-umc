@@ -10,6 +10,7 @@
 -- 11261102024  Maristela Silva Siqueira
 -- 11261103039  Otavio Vinicius Flauzino de Souza
 -- 11261102968  Roberta da Silva Ribeiro
+-- 11251103799  Sara Santos Rodrigues de Lima
 --
 -- Pre-requisito: banco unishare criado e povoado pelo script da Entrega 2.
 --

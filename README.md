@@ -16,6 +16,7 @@ Projeto da disciplina de **Banco de Dados** da UMC (2026), desenvolvido pelo **G
 | 11261102024 | Maristela Silva Siqueira |
 | 11261103039 | Otávio Vinicius Flauzino de Souza |
 | 11261102968 | Roberta da Silva Ribeiro |
+| 11251103799 | Sara Santos Rodrigues de Lima |
 
 ## Tecnologias
 

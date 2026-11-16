@@ -36,7 +36,7 @@ CREATE TABLE instituicao (
   cnpj           CHAR(14)     NOT NULL,
   CONSTRAINT pk_instituicao PRIMARY KEY (id_instituicao),
   CONSTRAINT uq_instituicao_cnpj UNIQUE (cnpj),
-  CONSTRAINT ck_instituicao_cnpj CHECK (CHAR_LENGTH(cnpj) = 14 AND cnpj NOT REGEXP '[^0-9]')
+  CONSTRAINT ck_instituicao_cnpj CHECK (CHAR_LENGTH(cnpj) = 14)
 );
 
 CREATE TABLE curso (
@@ -64,8 +64,8 @@ CREATE TABLE usuario (
   CONSTRAINT uq_usuario_cpf UNIQUE (cpf),
   CONSTRAINT uq_usuario_email UNIQUE (email),
   CONSTRAINT fk_usuario_instituicao FOREIGN KEY (id_instituicao) REFERENCES instituicao (id_instituicao),
-  CONSTRAINT ck_usuario_cpf CHECK (CHAR_LENGTH(cpf) = 11 AND cpf NOT REGEXP '[^0-9]'),
-  CONSTRAINT ck_usuario_telefone CHECK (CHAR_LENGTH(telefone) BETWEEN 10 AND 11 AND telefone NOT REGEXP '[^0-9]'),
+  CONSTRAINT ck_usuario_cpf CHECK (CHAR_LENGTH(cpf) = 11),
+  CONSTRAINT ck_usuario_telefone CHECK (CHAR_LENGTH(telefone) BETWEEN 10 AND 11),
   CONSTRAINT ck_usuario_perfil CHECK (perfil IN ('ADM', 'ALUNO')),
   CONSTRAINT ck_usuario_status CHECK (status_conta IN ('PENDENTE', 'ATIVA', 'BLOQUEADA', 'INATIVA')),
   CONSTRAINT ck_usuario_email CHECK (
@@ -85,7 +85,7 @@ CREATE TABLE aluno (
   CONSTRAINT uq_aluno_matricula UNIQUE (matricula),
   CONSTRAINT uq_aluno_usuario UNIQUE (id_usuario),
   CONSTRAINT fk_aluno_usuario FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
-  CONSTRAINT ck_aluno_matricula CHECK (CHAR_LENGTH(matricula) = 11 AND matricula NOT REGEXP '[^0-9]'),
+  CONSTRAINT ck_aluno_matricula CHECK (CHAR_LENGTH(matricula) = 11),
   CONSTRAINT ck_aluno_situacao CHECK (situacao_vinculo IN ('ATIVO', 'TRANCADO', 'CONCLUIDO', 'DESLIGADO'))
 );
 
@@ -113,7 +113,7 @@ CREATE TABLE documento_identidade (
   CONSTRAINT fk_documento_aluno FOREIGN KEY (id_aluno) REFERENCES aluno (id_aluno),
   CONSTRAINT fk_documento_analista FOREIGN KEY (id_usuario_analista) REFERENCES usuario (id_usuario),
   CONSTRAINT ck_documento_tipo CHECK (tipo_documento IN ('RG', 'CNH', 'RNE', 'PASSAPORTE')),
-  CONSTRAINT ck_documento_numero CHECK (CHAR_LENGTH(numero_documento) BETWEEN 5 AND 20 AND numero_documento NOT REGEXP '[^0-9A-Z]'),
+  CONSTRAINT ck_documento_numero CHECK (CHAR_LENGTH(numero_documento) BETWEEN 5 AND 20),
   CONSTRAINT ck_documento_status CHECK (status IN ('PENDENTE', 'APROVADO', 'RECUSADO')),
   CONSTRAINT ck_documento_recusa CHECK (status <> 'RECUSADO' OR motivo_recusa IS NOT NULL),
   CONSTRAINT ck_documento_analise CHECK (
@@ -260,7 +260,7 @@ CREATE TABLE retirada (
   CONSTRAINT uq_retirada_comprovante UNIQUE (codigo_comprovante),
   CONSTRAINT fk_retirada_reserva FOREIGN KEY (id_reserva) REFERENCES reserva (id_reserva),
   CONSTRAINT fk_retirada_biometria FOREIGN KEY (id_biometria) REFERENCES biometria_facial (id_biometria),
-  CONSTRAINT ck_retirada_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11 AND codigo_comprovante NOT REGEXP '[^A-Z0-9]'),
+  CONSTRAINT ck_retirada_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11),
   CONSTRAINT ck_retirada_estado CHECK (estado_conservacao IN ('NOVO', 'OTIMO', 'BOM', 'REGULAR', 'RUIM'))
 );
 
@@ -276,7 +276,7 @@ CREATE TABLE devolucao (
   CONSTRAINT uq_devolucao_retirada UNIQUE (id_retirada),
   CONSTRAINT uq_devolucao_comprovante UNIQUE (codigo_comprovante),
   CONSTRAINT fk_devolucao_retirada FOREIGN KEY (id_retirada) REFERENCES retirada (id_retirada),
-  CONSTRAINT ck_devolucao_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11 AND codigo_comprovante NOT REGEXP '[^A-Z0-9]'),
+  CONSTRAINT ck_devolucao_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11),
   CONSTRAINT ck_devolucao_estado CHECK (estado_conservacao IN ('NOVO', 'OTIMO', 'BOM', 'REGULAR', 'RUIM'))
 );
 
@@ -3423,166 +3423,107 @@ INSERT INTO registro_operacao (tipo_operacao, tabela_afetada, id_afetado, endere
 
 USE unishare;
 
--- View 1: desempenho de cada equipamento (reservas, dias reservados e receita simulada)
-CREATE VIEW vw_desempenho_equipamentos AS
-SELECT e.id_equipamento,
-       e.nome AS equipamento,
-       c.nome AS categoria,
-       CASE WHEN u.perfil = 'ADM' THEN 'INSTITUCIONAL' ELSE 'ALUNO' END AS origem,
-       u.nome AS proprietario,
-       e.situacao,
-       COUNT(s.id_solicitacao) AS reservas,
-       COALESCE(SUM(DATEDIFF(s.data_fim, s.data_inicio)), 0) AS dias_reservados,
-       COALESCE(SUM(p.valor_total), 0) AS receita_simulada,
-       MAX(s.data_inicio) AS ultima_reserva
+-- View 1: equipamentos disponiveis, com categoria, dono e a disponibilizacao mais recente
+CREATE VIEW vw_equipamentos_disponiveis AS
+SELECT e.id_equipamento, e.nome AS equipamento, c.nome AS categoria, u.nome AS proprietario,
+       d.modalidade, d.valor_diaria, d.data_fim AS disponivel_ate, e.estado_conservacao
 FROM equipamento e
 JOIN categoria c ON c.id_categoria = e.id_categoria
 JOIN usuario u ON u.id_usuario = e.id_usuario_proprietario
-LEFT JOIN disponibilizacao d ON d.id_equipamento = e.id_equipamento
-LEFT JOIN solicitacao s ON s.id_disponibilizacao = d.id_disponibilizacao AND s.status = 'APROVADA'
-LEFT JOIN pagamento_simulado p ON p.id_solicitacao = s.id_solicitacao AND p.status = 'SIMULADO'
-GROUP BY e.id_equipamento, e.nome, c.nome, u.perfil, u.nome, e.situacao;
+JOIN disponibilizacao d ON d.id_equipamento = e.id_equipamento
+WHERE e.situacao = 'DISPONIVEL'
+  AND d.id_disponibilizacao = (SELECT MAX(d2.id_disponibilizacao) FROM disponibilizacao d2
+                               WHERE d2.id_equipamento = e.id_equipamento);
 
--- Indice da view 1: liga a oferta as solicitacoes aprovadas e cobre o periodo
-CREATE INDEX ix_solicitacao_disp_status_periodo ON solicitacao (id_disponibilizacao, status, data_inicio, data_fim);
+-- Indice da view 1: filtra os equipamentos pela situacao
+CREATE INDEX ix_equipamento_situacao ON equipamento (situacao);
 
--- View 2: tempo que o equipamento fica com o aluno e atrasos por categoria
-CREATE VIEW vw_tempo_devolucao_categoria AS
-SELECT c.nome AS categoria,
-       COUNT(*) AS devolucoes,
-       ROUND(AVG(TIMESTAMPDIFF(HOUR, rt.data_hora, dv.data_hora)) / 24, 1) AS media_dias_com_aluno,
-       ROUND(MIN(TIMESTAMPDIFF(HOUR, rt.data_hora, dv.data_hora)) / 24, 1) AS minimo_dias,
-       ROUND(MAX(TIMESTAMPDIFF(HOUR, rt.data_hora, dv.data_hora)) / 24, 1) AS maximo_dias,
-       SUM(DATE(dv.data_hora) > s.data_fim) AS devolucoes_atrasadas,
-       ROUND(100 * SUM(DATE(dv.data_hora) > s.data_fim) / COUNT(*), 1) AS percentual_atraso
-FROM devolucao dv
-JOIN retirada rt ON rt.id_retirada = dv.id_retirada
-JOIN reserva r ON r.id_reserva = rt.id_reserva
+-- View 2: solicitacoes aguardando resposta, com o aluno, o equipamento e o valor estimado
+CREATE VIEW vw_solicitacoes_pendentes AS
+SELECT s.id_solicitacao, u.nome AS aluno, a.matricula, e.nome AS equipamento,
+       s.data_inicio, s.data_fim, DATEDIFF(s.data_fim, s.data_inicio) + 1 AS dias,
+       (DATEDIFF(s.data_fim, s.data_inicio) + 1) * d.valor_diaria AS valor_estimado
+FROM solicitacao s
+JOIN aluno a ON a.id_aluno = s.id_aluno
+JOIN usuario u ON u.id_usuario = a.id_usuario
+JOIN disponibilizacao d ON d.id_disponibilizacao = s.id_disponibilizacao
+JOIN equipamento e ON e.id_equipamento = d.id_equipamento
+WHERE s.status = 'PENDENTE';
+
+-- Indice da view 2: filtra as solicitacoes pelo status
+CREATE INDEX ix_solicitacao_status ON solicitacao (status);
+
+-- View 3: reservas em andamento (confirmadas, em uso ou atrasadas)
+CREATE VIEW vw_reservas_em_andamento AS
+SELECT r.id_reserva, r.status, a.matricula, e.nome AS equipamento, s.data_inicio, s.data_fim
+FROM reserva r
 JOIN solicitacao s ON s.id_solicitacao = r.id_solicitacao
+JOIN aluno a ON a.id_aluno = s.id_aluno
+JOIN disponibilizacao d ON d.id_disponibilizacao = s.id_disponibilizacao
+JOIN equipamento e ON e.id_equipamento = d.id_equipamento
+WHERE r.status IN ('CONFIRMADA', 'EM_USO', 'ATRASADA');
+
+-- Indice da view 3: filtra as reservas pelo status
+CREATE INDEX ix_reserva_status ON reserva (status);
+
+-- View 4: quantidade de pagamentos e valor arrecadado por categoria
+CREATE VIEW vw_receita_por_categoria AS
+SELECT c.nome AS categoria, COUNT(*) AS pagamentos, SUM(p.valor_total) AS valor_total
+FROM pagamento_simulado p
+JOIN solicitacao s ON s.id_solicitacao = p.id_solicitacao
 JOIN disponibilizacao d ON d.id_disponibilizacao = s.id_disponibilizacao
 JOIN equipamento e ON e.id_equipamento = d.id_equipamento
 JOIN categoria c ON c.id_categoria = e.id_categoria
+WHERE p.status = 'SIMULADO'
 GROUP BY c.nome;
 
--- Indice da view 2: cobre a juncao da devolucao com a retirada e a data da devolucao
-CREATE INDEX ix_devolucao_retirada_data ON devolucao (id_retirada, data_hora);
+-- Indice da view 4: filtra os pagamentos pelo status
+CREATE INDEX ix_pagamento_status ON pagamento_simulado (status);
 
--- View 3: receita simulada de aluguel por proprietario
-CREATE VIEW vw_receita_proprietarios AS
-SELECT u.id_usuario,
-       u.nome AS proprietario,
-       u.email,
-       COUNT(DISTINCT e.id_equipamento) AS equipamentos_alugados,
-       COUNT(p.id_pagamento) AS alugueis,
-       SUM(p.valor_total) AS receita_total,
-       ROUND(AVG(p.valor_total), 2) AS ticket_medio
-FROM pagamento_simulado p
-JOIN solicitacao s ON s.id_solicitacao = p.id_solicitacao AND s.status = 'APROVADA'
+-- View 5: danos ainda nao resolvidos, com quem relatou e a quantidade de fotos
+CREATE VIEW vw_danos_em_aberto AS
+SELECT d.id_dano, e.nome AS equipamento, u.nome AS relator, d.descricao, d.status_andamento, d.data_hora,
+       (SELECT COUNT(*) FROM foto_dano f WHERE f.id_dano = d.id_dano) AS fotos
+FROM dano d
+JOIN equipamento e ON e.id_equipamento = d.id_equipamento
+JOIN usuario u ON u.id_usuario = d.id_usuario_relator
+WHERE d.status_andamento IN ('ABERTO', 'EM_REPARO');
+
+-- Indice da view 5: filtra os danos pelo andamento
+CREATE INDEX ix_dano_status ON dano (status_andamento);
+
+-- View 6: avaliacoes negativas (nota 1 ou 2), com o equipamento e o avaliador
+CREATE VIEW vw_avaliacoes_negativas AS
+SELECT av.id_avaliacao, e.nome AS equipamento, av.nota, av.comentario, av.data_hora,
+       (SELECT a.matricula FROM aluno a WHERE a.id_aluno = av.id_aluno_avaliador) AS matricula_avaliador
+FROM avaliacao av
+JOIN reserva r ON r.id_reserva = av.id_reserva
+JOIN solicitacao s ON s.id_solicitacao = r.id_solicitacao
 JOIN disponibilizacao d ON d.id_disponibilizacao = s.id_disponibilizacao
 JOIN equipamento e ON e.id_equipamento = d.id_equipamento
-JOIN usuario u ON u.id_usuario = e.id_usuario_proprietario
-WHERE p.status = 'SIMULADO'
-GROUP BY u.id_usuario, u.nome, u.email;
+WHERE av.nota <= 2;
 
--- Indice da view 3: filtra pagamentos validos e cobre a solicitacao e o valor
-CREATE INDEX ix_pagamento_status_solicitacao_valor ON pagamento_simulado (status, id_solicitacao, valor_total);
+-- Indice da view 6: filtra as avaliacoes pela nota
+CREATE INDEX ix_avaliacao_nota ON avaliacao (nota);
 
--- View 4: solicitacoes por mes, por status e tempo medio de resposta
-CREATE VIEW vw_solicitacoes_mensais AS
-SELECT DATE_FORMAT(s.criada_em, '%Y-%m') AS mes,
-       COUNT(*) AS total,
-       SUM(s.status = 'APROVADA') AS aprovadas,
-       SUM(s.status = 'RECUSADA') AS recusadas,
-       SUM(s.status = 'CANCELADA') AS canceladas,
-       SUM(s.status = 'EXPIRADA') AS expiradas,
-       SUM(s.status = 'PENDENTE') AS pendentes,
-       ROUND(100 * SUM(s.status = 'APROVADA') / COUNT(*), 1) AS taxa_aprovacao,
-       ROUND(AVG(TIMESTAMPDIFF(MINUTE, s.criada_em, s.respondida_em)) / 60, 1) AS media_horas_resposta
-FROM solicitacao s
-GROUP BY DATE_FORMAT(s.criada_em, '%Y-%m');
+-- View 7: documentos de identidade aguardando analise do administrador
+CREATE VIEW vw_documentos_pendentes AS
+SELECT doc.id_documento, u.nome AS aluno, a.matricula, doc.tipo_documento, doc.enviado_em
+FROM documento_identidade doc
+JOIN aluno a ON a.id_aluno = doc.id_aluno
+JOIN usuario u ON u.id_usuario = a.id_usuario
+WHERE doc.status = 'PENDENTE';
 
--- Indice da view 4: cobre todas as colunas usadas, sem ler a tabela
-CREATE INDEX ix_solicitacao_criada_status_resposta ON solicitacao (criada_em, status, respondida_em);
+-- Indice da view 7: filtra os documentos pelo status
+CREATE INDEX ix_documento_status ON documento_identidade (status);
 
--- View 5: reputacao dos alunos; o avaliado e a outra parte da reserva
-CREATE VIEW vw_reputacao_alunos AS
-SELECT u.id_usuario,
-       u.nome AS aluno,
-       a.matricula,
-       COUNT(*) AS avaliacoes_recebidas,
-       ROUND(AVG(x.nota), 2) AS reputacao,
-       SUM(x.nota <= 2) AS avaliacoes_negativas,
-       MAX(x.data_hora) AS ultima_avaliacao
-FROM (
-  SELECT av.nota, av.data_hora,
-         CASE WHEN av.id_aluno_avaliador = s.id_aluno THEN e.id_usuario_proprietario ELSE sol.id_usuario END AS id_usuario_avaliado
-  FROM avaliacao av
-  JOIN reserva r ON r.id_reserva = av.id_reserva
-  JOIN solicitacao s ON s.id_solicitacao = r.id_solicitacao
-  JOIN aluno sol ON sol.id_aluno = s.id_aluno
-  JOIN disponibilizacao d ON d.id_disponibilizacao = s.id_disponibilizacao
-  JOIN equipamento e ON e.id_equipamento = d.id_equipamento
-) x
-JOIN usuario u ON u.id_usuario = x.id_usuario_avaliado
-JOIN aluno a ON a.id_usuario = u.id_usuario
-GROUP BY u.id_usuario, u.nome, a.matricula;
+-- View 8: quantidade de notificacoes nao lidas por usuario
+CREATE VIEW vw_notificacoes_nao_lidas AS
+SELECT u.id_usuario, u.nome AS usuario, COUNT(*) AS nao_lidas, MIN(n.enviada_em) AS mais_antiga
+FROM notificacao n
+JOIN usuario u ON u.id_usuario = n.id_usuario
+WHERE n.lida = FALSE
+GROUP BY u.id_usuario, u.nome;
 
--- Indice da view 5: cobre a juncao da avaliacao com a reserva, o avaliador e a nota
-CREATE INDEX ix_avaliacao_reserva_avaliador_nota ON avaliacao (id_reserva, id_aluno_avaliador, nota, data_hora);
-
--- View 6: danos ainda nao resolvidos e ha quantos dias o equipamento esta parado
-CREATE VIEW vw_danos_em_aberto AS
-SELECT dn.id_dano,
-       e.nome AS equipamento,
-       dono.nome AS proprietario,
-       rel.nome AS relatado_por,
-       dn.descricao,
-       dn.status_andamento,
-       dn.data_hora AS registrado_em,
-       DATEDIFF(CURDATE(), DATE(dn.data_hora)) AS dias_parado,
-       (SELECT COUNT(*) FROM foto_dano f WHERE f.id_dano = dn.id_dano) AS fotos
-FROM dano dn
-JOIN equipamento e ON e.id_equipamento = dn.id_equipamento
-JOIN usuario dono ON dono.id_usuario = e.id_usuario_proprietario
-JOIN usuario rel ON rel.id_usuario = dn.id_usuario_relator
-WHERE dn.status_andamento <> 'RESOLVIDO';
-
--- Indice da view 6: localiza os danos pelo andamento e pela data
-CREATE INDEX ix_dano_status_data ON dano (status_andamento, data_hora);
-
--- View 7: inventario de equipamentos por categoria e situacao
-CREATE VIEW vw_inventario_categoria AS
-SELECT c.nome AS categoria,
-       COUNT(e.id_equipamento) AS total,
-       SUM(e.situacao = 'DISPONIVEL') AS disponiveis,
-       SUM(e.situacao = 'RESERVADO') AS reservados,
-       SUM(e.situacao = 'EM_USO') AS em_uso,
-       SUM(e.situacao = 'EM_MANUTENCAO') AS em_manutencao,
-       SUM(e.situacao = 'INDISPONIVEL') AS indisponiveis,
-       SUM(u.perfil = 'ADM') AS institucionais
-FROM categoria c
-LEFT JOIN equipamento e ON e.id_categoria = c.id_categoria
-LEFT JOIN usuario u ON u.id_usuario = e.id_usuario_proprietario
-GROUP BY c.id_categoria, c.nome;
-
--- Indice da view 7: agrupa equipamentos por categoria e situacao
-CREATE INDEX ix_equipamento_categoria_situacao ON equipamento (id_categoria, situacao, id_usuario_proprietario);
-
--- View 8: auditoria de acesso por usuario (logins, falhas, operacoes e IPs)
-CREATE VIEW vw_auditoria_usuarios AS
-SELECT u.id_usuario,
-       u.nome,
-       u.perfil,
-       u.status_conta,
-       SUM(ro.tipo_operacao = 'LOGIN') AS logins,
-       (SELECT COUNT(*) FROM registro_operacao f
-         WHERE f.tipo_operacao = 'LOGIN_FALHA' AND f.tabela_afetada = 'usuario' AND f.id_afetado = u.id_usuario) AS logins_com_falha,
-       SUM(ro.tipo_operacao NOT IN ('LOGIN', 'LOGIN_FALHA')) AS operacoes,
-       MAX(CASE WHEN ro.tipo_operacao = 'LOGIN' THEN ro.data_hora END) AS ultimo_login,
-       COUNT(DISTINCT ro.endereco_ip) AS ips_diferentes
-FROM usuario u
-LEFT JOIN registro_operacao ro ON ro.id_usuario = u.id_usuario
-GROUP BY u.id_usuario, u.nome, u.perfil, u.status_conta;
-
--- Indice da view 8: agrupa os registros por usuario e tipo de operacao
-CREATE INDEX ix_registro_usuario_tipo_data ON registro_operacao (id_usuario, tipo_operacao, data_hora, endereco_ip);
+-- Indice da view 8: filtra as notificacoes pela leitura
+CREATE INDEX ix_notificacao_lida ON notificacao (lida);

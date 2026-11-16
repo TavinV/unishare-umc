@@ -18,5 +18,5 @@ Versão original da modelagem e dos scripts. As correções feitas depois estão
 ## Como executar
 Rode os dois scripts em ordem, como **script** no DBeaver (**Alt+X**), conectado como `root`.
 
-> As validações de formato (CPF, CNPJ, telefone e matrícula) usam `CHAR_LENGTH` e `NOT REGEXP '[^0-9]'`, em vez de
-> expressões com `{n}` e `$`. Essa forma evita um erro de separação de comandos no DBeaver.
+> CPF, CNPJ, telefone, matrícula e códigos são guardados sem máscara. As constraints `CHECK` validam apenas o tamanho
+> de cada campo, com `CHAR_LENGTH`.

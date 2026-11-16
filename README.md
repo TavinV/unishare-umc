@@ -60,19 +60,19 @@ unishare/
 - **Um único script** com:
   - criação do banco e das tabelas;
   - povoamento com as **chaves estrangeiras preenchidas por `SELECT`**;
-  - **8 views** de relatório gerencial;
+  - **8 views** de relatório gerencial, com até 4 `JOIN`s cada;
   - **1 índice** para otimizar cada view, com o uso confirmado por `EXPLAIN`.
 
 | View | Relatório |
 |---|---|
-| `vw_desempenho_equipamentos` | Reservas, dias reservados e receita por equipamento |
-| `vw_tempo_devolucao_categoria` | Tempo médio com o aluno e percentual de atraso por categoria |
-| `vw_receita_proprietarios` | Receita simulada e ticket médio por proprietário |
-| `vw_solicitacoes_mensais` | Solicitações por mês, status, taxa de aprovação e tempo de resposta |
-| `vw_reputacao_alunos` | Reputação dos alunos a partir das avaliações recebidas |
-| `vw_danos_em_aberto` | Danos não resolvidos e dias de equipamento parado |
-| `vw_inventario_categoria` | Inventário de equipamentos por categoria e situação |
-| `vw_auditoria_usuarios` | Logins, falhas, operações e IPs por usuário |
+| `vw_equipamentos_disponiveis` | Equipamentos disponíveis, com categoria, dono, modalidade e valor da diária |
+| `vw_solicitacoes_pendentes` | Solicitações aguardando resposta, com aluno, equipamento e valor estimado |
+| `vw_reservas_em_andamento` | Reservas confirmadas, em uso ou atrasadas |
+| `vw_receita_por_categoria` | Quantidade de pagamentos e valor arrecadado por categoria |
+| `vw_danos_em_aberto` | Danos não resolvidos, com quem relatou e quantidade de fotos |
+| `vw_avaliacoes_negativas` | Avaliações com nota 1 ou 2, com o equipamento avaliado |
+| `vw_documentos_pendentes` | Documentos de identidade aguardando análise |
+| `vw_notificacoes_nao_lidas` | Quantidade de notificações não lidas por usuário |
 
 ### Entrega 3 – Regra de negócio e procedures
 - **Regra de negócio RN24/RN25**: aprovação de solicitação sem conflito de reservas. A implementação combina:
@@ -90,8 +90,8 @@ unishare/
 O MR completo, em imagem e em texto, está em [`Entrega 2/modelo_logico`](Entrega%202/modelo_logico).
 
 ### Dados sem máscara
-Nenhum dado é guardado com máscara ou formatação. Constraints `CHECK` garantem que estes campos contêm apenas
-letras e dígitos, no tamanho certo:
+Nenhum dado é guardado com máscara ou formatação: estes campos contêm apenas letras e dígitos. Constraints `CHECK`
+validam o tamanho de cada um:
 
 | Campo | Tamanho | Exemplo armazenado |
 |---|---|---|

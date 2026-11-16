@@ -28,14 +28,17 @@
 
 | View | Índice |
 |---|---|
-| `vw_desempenho_equipamentos` | `ix_solicitacao_disp_status_periodo` |
-| `vw_tempo_devolucao_categoria` | `ix_devolucao_retirada_data` |
-| `vw_receita_proprietarios` | `ix_pagamento_status_solicitacao_valor` |
-| `vw_solicitacoes_mensais` | `ix_solicitacao_criada_status_resposta` |
-| `vw_reputacao_alunos` | `ix_avaliacao_reserva_avaliador_nota` |
-| `vw_danos_em_aberto` | `ix_dano_status_data` |
-| `vw_inventario_categoria` | `ix_equipamento_categoria_situacao` |
-| `vw_auditoria_usuarios` | `ix_registro_usuario_tipo_data` |
+| `vw_equipamentos_disponiveis` | `ix_equipamento_situacao` (equipamento: situacao) |
+| `vw_solicitacoes_pendentes` | `ix_solicitacao_status` (solicitacao: status) |
+| `vw_reservas_em_andamento` | `ix_reserva_status` (reserva: status) |
+| `vw_receita_por_categoria` | `ix_pagamento_status` (pagamento_simulado: status) |
+| `vw_danos_em_aberto` | `ix_dano_status` (dano: status_andamento) |
+| `vw_avaliacoes_negativas` | `ix_avaliacao_nota` (avaliacao: nota) |
+| `vw_documentos_pendentes` | `ix_documento_status` (documento_identidade: status) |
+| `vw_notificacoes_nao_lidas` | `ix_notificacao_lida` (notificacao: lida) |
+
+Cada view tem no máximo 4 `JOIN`s. Algumas usam subquery (contar fotos, pegar a disponibilização mais recente) e
+funções simples (`COUNT`, `SUM`, `MIN`, `MAX`, `DATEDIFF`). O índice de cada view é a coluna pela qual ela filtra.
 
 ## Como executar
 Conectado como `root`, execute o arquivo inteiro como **script** (**Alt+X** no DBeaver). Se o banco já existir,

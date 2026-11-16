@@ -13,7 +13,7 @@ CREATE TABLE instituicao (
   cnpj           CHAR(14)     NOT NULL,
   CONSTRAINT pk_instituicao PRIMARY KEY (id_instituicao),
   CONSTRAINT uq_instituicao_cnpj UNIQUE (cnpj),
-  CONSTRAINT ck_instituicao_cnpj CHECK (CHAR_LENGTH(cnpj) = 14 AND cnpj NOT REGEXP '[^0-9]')
+  CONSTRAINT ck_instituicao_cnpj CHECK (CHAR_LENGTH(cnpj) = 14)
 );
 
 CREATE TABLE curso (
@@ -41,8 +41,8 @@ CREATE TABLE usuario (
   CONSTRAINT uq_usuario_cpf UNIQUE (cpf),
   CONSTRAINT uq_usuario_email UNIQUE (email),
   CONSTRAINT fk_usuario_instituicao FOREIGN KEY (id_instituicao) REFERENCES instituicao (id_instituicao),
-  CONSTRAINT ck_usuario_cpf CHECK (CHAR_LENGTH(cpf) = 11 AND cpf NOT REGEXP '[^0-9]'),
-  CONSTRAINT ck_usuario_telefone CHECK (CHAR_LENGTH(telefone) BETWEEN 10 AND 11 AND telefone NOT REGEXP '[^0-9]'),
+  CONSTRAINT ck_usuario_cpf CHECK (CHAR_LENGTH(cpf) = 11),
+  CONSTRAINT ck_usuario_telefone CHECK (CHAR_LENGTH(telefone) BETWEEN 10 AND 11),
   CONSTRAINT ck_usuario_perfil CHECK (perfil IN ('ADM', 'ALUNO')),
   CONSTRAINT ck_usuario_status CHECK (status_conta IN ('PENDENTE', 'ATIVA', 'BLOQUEADA', 'INATIVA')),
   CONSTRAINT ck_usuario_email CHECK (
@@ -62,7 +62,7 @@ CREATE TABLE aluno (
   CONSTRAINT uq_aluno_matricula UNIQUE (matricula),
   CONSTRAINT uq_aluno_usuario UNIQUE (id_usuario),
   CONSTRAINT fk_aluno_usuario FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
-  CONSTRAINT ck_aluno_matricula CHECK (CHAR_LENGTH(matricula) = 11 AND matricula NOT REGEXP '[^0-9]'),
+  CONSTRAINT ck_aluno_matricula CHECK (CHAR_LENGTH(matricula) = 11),
   CONSTRAINT ck_aluno_situacao CHECK (situacao_vinculo IN ('ATIVO', 'TRANCADO', 'CONCLUIDO', 'DESLIGADO'))
 );
 
@@ -90,7 +90,7 @@ CREATE TABLE documento_identidade (
   CONSTRAINT fk_documento_aluno FOREIGN KEY (id_aluno) REFERENCES aluno (id_aluno),
   CONSTRAINT fk_documento_analista FOREIGN KEY (id_usuario_analista) REFERENCES usuario (id_usuario),
   CONSTRAINT ck_documento_tipo CHECK (tipo_documento IN ('RG', 'CNH', 'RNE', 'PASSAPORTE')),
-  CONSTRAINT ck_documento_numero CHECK (CHAR_LENGTH(numero_documento) BETWEEN 5 AND 20 AND numero_documento NOT REGEXP '[^0-9A-Z]'),
+  CONSTRAINT ck_documento_numero CHECK (CHAR_LENGTH(numero_documento) BETWEEN 5 AND 20),
   CONSTRAINT ck_documento_status CHECK (status IN ('PENDENTE', 'APROVADO', 'RECUSADO')),
   CONSTRAINT ck_documento_recusa CHECK (status <> 'RECUSADO' OR motivo_recusa IS NOT NULL),
   CONSTRAINT ck_documento_analise CHECK (
@@ -237,7 +237,7 @@ CREATE TABLE retirada (
   CONSTRAINT uq_retirada_comprovante UNIQUE (codigo_comprovante),
   CONSTRAINT fk_retirada_reserva FOREIGN KEY (id_reserva) REFERENCES reserva (id_reserva),
   CONSTRAINT fk_retirada_biometria FOREIGN KEY (id_biometria) REFERENCES biometria_facial (id_biometria),
-  CONSTRAINT ck_retirada_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11 AND codigo_comprovante NOT REGEXP '[^A-Z0-9]'),
+  CONSTRAINT ck_retirada_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11),
   CONSTRAINT ck_retirada_estado CHECK (estado_conservacao IN ('NOVO', 'OTIMO', 'BOM', 'REGULAR', 'RUIM'))
 );
 
@@ -253,7 +253,7 @@ CREATE TABLE devolucao (
   CONSTRAINT uq_devolucao_retirada UNIQUE (id_retirada),
   CONSTRAINT uq_devolucao_comprovante UNIQUE (codigo_comprovante),
   CONSTRAINT fk_devolucao_retirada FOREIGN KEY (id_retirada) REFERENCES retirada (id_retirada),
-  CONSTRAINT ck_devolucao_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11 AND codigo_comprovante NOT REGEXP '[^A-Z0-9]'),
+  CONSTRAINT ck_devolucao_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11),
   CONSTRAINT ck_devolucao_estado CHECK (estado_conservacao IN ('NOVO', 'OTIMO', 'BOM', 'REGULAR', 'RUIM'))
 );
 

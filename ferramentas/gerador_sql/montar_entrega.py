@@ -20,6 +20,7 @@ CABECALHO = """-- ==============================================================
 --   Otavio Vinicius Flauzino de Souza  - 11261103039
 --   Roberta da Silva Ribeiro           - 11261102968
 --   Sara Santos Rodrigues de Lima      - 11251103799
+--   Thiago Araujo Cordeiro da Silva    - 11261103131
 --
 -- Conteudo:
 --   1. Criacao do banco

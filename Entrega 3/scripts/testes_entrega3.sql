@@ -86,9 +86,9 @@ SET @doc = LAST_INSERT_ID();
 CALL sp_documento_identidade_atualizar(@doc, 'APROVADO', NULL, (SELECT id_usuario FROM usuario WHERE perfil = 'ADM' LIMIT 1));
 
 -- biometria_facial
-CALL sp_biometria_facial_inserir(@u, RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1');
+CALL sp_biometria_facial_inserir(@u, UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1');
 SET @bio = LAST_INSERT_ID();
-CALL sp_biometria_facial_atualizar(@bio, RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2);
+CALL sp_biometria_facial_atualizar(@bio, UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2);
 
 -- aceite_termo
 CALL sp_aceite_termo_inserir(@u, @termo);

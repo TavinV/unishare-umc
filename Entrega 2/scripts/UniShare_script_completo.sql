@@ -11,6 +11,7 @@
 --   Otavio Vinicius Flauzino de Souza  - 11261103039
 --   Roberta da Silva Ribeiro           - 11261102968
 --   Sara Santos Rodrigues de Lima      - 11251103799
+--   Thiago Araujo Cordeiro da Silva    - 11261103131
 --
 -- Conteudo:
 --   1. Criacao do banco
@@ -25,7 +26,7 @@
 
 CREATE DATABASE unishare
   DEFAULT CHARACTER SET utf8mb4
-  DEFAULT COLLATE utf8mb4_0900_ai_ci;
+  DEFAULT COLLATE utf8mb4_unicode_ci;
 
 USE unishare;
 
@@ -558,52 +559,52 @@ INSERT INTO documento_identidade (tipo_documento, numero_documento, arquivo_url,
 
 -- biometria facial obrigatoria; embeddings simulados com bytes aleatorios
 INSERT INTO biometria_facial (id_usuario, embedding_iv, embedding_tag, embedding_ct, key_version, model_version, criado_em) VALUES
-  ((SELECT id_usuario FROM usuario WHERE email = 'pablo.chagas@admin.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-07-20 09:08:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'carla.mendes@admin.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-07-20 09:33:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'ricardo.alves@admin.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-07-20 09:58:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'juliana.prado@admin.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-07-20 10:23:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'otavio.freitas@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-01 16:34:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'fernanda.castro@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-03 10:09:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'lucas.almeida@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-03 11:26:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'andre.fonseca@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-06 10:53:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'vanessa.araujo@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-06 12:33:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'henrique.oliveira@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-06 13:48:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'larissa.gomes@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-06 16:42:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'bruno.lima@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-07 11:08:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'isabela.carvalho@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-07 15:05:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'gabriela.nunes@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-07 16:51:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'sabrina.lopes@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-08 09:07:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'yasmin.correia@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-08 09:07:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'matheus.pereira@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-08 14:36:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'camila.ferreira@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-09 11:20:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'renata.cardoso@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-09 11:24:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'ana.souza@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-11 18:19:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'vinicius.batista@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-11 19:41:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'daniela.pinto@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-11 21:47:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'eduarda.rocha@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-13 19:20:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'natalia.barbosa@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-15 12:25:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'thiago.monteiro@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-17 13:32:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'eduardo.macedo@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-18 08:58:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'joao.ribeiro@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-19 13:00:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'beatriz.duarte@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-20 14:30:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'rafael.moreira@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-20 19:07:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'paula.vieira@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-22 12:06:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'diego.martins@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-22 19:52:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'rodrigo.teixeira@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-25 09:25:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'mariana.costa@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-25 09:44:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'caio.ramos@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-25 13:24:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'felipe.santos@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-08-25 19:38:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'gustavo.rezende@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-09-07 19:06:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'helena.moura@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-09-16 18:41:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'vinicius.batista@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2, 'arcface_r100_v2', '2026-10-04 15:21:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'felipe.santos@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2, 'arcface_r100_v2', '2026-10-05 17:41:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'bruno.lima@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2, 'arcface_r100_v2', '2026-10-07 10:51:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'yasmin.correia@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2, 'arcface_r100_v2', '2026-10-09 11:13:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'pablo.chagas@admin.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2, 'arcface_r100_v2', '2026-10-12 17:36:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'larissa.gomes@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 2, 'arcface_r100_v2', '2026-10-14 12:58:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'igor.tavares@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-10-19 12:41:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'jessica.campos@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-10-24 13:14:00'),
-  ((SELECT id_usuario FROM usuario WHERE email = 'leonardo.farias@aluno.umc.br'), RANDOM_BYTES(12), RANDOM_BYTES(16), CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024)), 1, 'arcface_r50_v1', '2026-10-26 12:59:00');
+  ((SELECT id_usuario FROM usuario WHERE email = 'pablo.chagas@admin.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-07-20 09:08:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'carla.mendes@admin.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-07-20 09:33:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'ricardo.alves@admin.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-07-20 09:58:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'juliana.prado@admin.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-07-20 10:23:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'otavio.freitas@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-01 16:34:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'fernanda.castro@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-03 10:09:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'lucas.almeida@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-03 11:26:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'andre.fonseca@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-06 10:53:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'vanessa.araujo@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-06 12:33:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'henrique.oliveira@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-06 13:48:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'larissa.gomes@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-06 16:42:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'bruno.lima@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-07 11:08:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'isabela.carvalho@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-07 15:05:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'gabriela.nunes@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-07 16:51:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'sabrina.lopes@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-08 09:07:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'yasmin.correia@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-08 09:07:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'matheus.pereira@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-08 14:36:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'camila.ferreira@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-09 11:20:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'renata.cardoso@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-09 11:24:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'ana.souza@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-11 18:19:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'vinicius.batista@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-11 19:41:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'daniela.pinto@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-11 21:47:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'eduarda.rocha@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-13 19:20:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'natalia.barbosa@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-15 12:25:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'thiago.monteiro@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-17 13:32:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'eduardo.macedo@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-18 08:58:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'joao.ribeiro@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-19 13:00:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'beatriz.duarte@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-20 14:30:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'rafael.moreira@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-20 19:07:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'paula.vieira@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-22 12:06:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'diego.martins@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-22 19:52:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'rodrigo.teixeira@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-25 09:25:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'mariana.costa@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-25 09:44:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'caio.ramos@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-25 13:24:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'felipe.santos@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-08-25 19:38:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'gustavo.rezende@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-09-07 19:06:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'helena.moura@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-09-16 18:41:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'vinicius.batista@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2, 'arcface_r100_v2', '2026-10-04 15:21:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'felipe.santos@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2, 'arcface_r100_v2', '2026-10-05 17:41:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'bruno.lima@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2, 'arcface_r100_v2', '2026-10-07 10:51:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'yasmin.correia@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2, 'arcface_r100_v2', '2026-10-09 11:13:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'pablo.chagas@admin.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2, 'arcface_r100_v2', '2026-10-12 17:36:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'larissa.gomes@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 2, 'arcface_r100_v2', '2026-10-14 12:58:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'igor.tavares@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-10-19 12:41:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'jessica.campos@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-10-24 13:14:00'),
+  ((SELECT id_usuario FROM usuario WHERE email = 'leonardo.farias@aluno.umc.br'), UNHEX(LEFT(MD5(RAND()), 24)), UNHEX(MD5(RAND())), UNHEX(REPEAT(MD5(RAND()), 128)), 1, 'arcface_r50_v1', '2026-10-26 12:59:00');
 
 -- termos de uso
 INSERT INTO termo_uso (versao, conteudo, publicado_em) VALUES

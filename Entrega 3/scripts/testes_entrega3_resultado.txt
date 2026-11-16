@@ -1,3 +1,4 @@
+ERROR 1644 (45000) at line 35: RN26: somente o proprietario do equipamento pode aprovar
 +----------------+
 | id_solicitacao |
 +----------------+
@@ -13,8 +14,6 @@
 +--------------+
 |           76 |
 +--------------+
-ERROR 1644 (45000) at line 35: RN26: somente o proprietario do equipamento pode aprovar
-ERROR 1644 (45000) at line 46: RN40: somente solicitacao pendente pode ser aprovada
 +-------------------------+-------------------+
 | id_solicitacao_aprovada | id_reserva_criada |
 +-------------------------+-------------------+
@@ -42,6 +41,7 @@ ERROR 1644 (45000) at line 46: RN40: somente solicitacao pendente pode ser aprov
 | SOLICITACAO_RECUSADA |          6 |            148 |
 | CONFIRMACAO_RESERVA  |          5 |            147 |
 +----------------------+------------+----------------+
+ERROR 1644 (45000) at line 46: RN40: somente solicitacao pendente pode ser aprovada
 +----------------+
 | id_solicitacao |
 +----------------+

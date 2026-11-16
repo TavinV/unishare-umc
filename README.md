@@ -17,10 +17,11 @@ Projeto da disciplina de **Banco de Dados** da UMC (2026), desenvolvido pelo **G
 | 11261103039 | Otávio Vinicius Flauzino de Souza |
 | 11261102968 | Roberta da Silva Ribeiro |
 | 11251103799 | Sara Santos Rodrigues de Lima |
+| 11261103131 | Thiago Araujo Cordeiro da Silva |
 
 ## Tecnologias
 
-- **MySQL 8.4**: SGBD do projeto
+- **MySQL 8.4**: SGBD do projeto. Os scripts também foram testados no **MariaDB 10.4** (XAMPP).
 - **brModelo 3.2**: modelo conceitual (MER) e modelo lógico (MR)
 - **DBeaver**: cliente usado para executar os scripts
 - **Docker**: ambiente local de MySQL (opcional)

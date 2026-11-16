@@ -867,7 +867,7 @@ insert("documento_identidade", ["tipo_documento", "numero_documento", "arquivo_u
          d_.envio, d_.analise, s_aluno(d_.aluno), s_user(d_.analista) if d_.analista else None) for d_ in documentos],
        "documentos de identidade")
 insert("biometria_facial", ["id_usuario", "embedding_iv", "embedding_tag", "embedding_ct", "key_version", "model_version", "criado_em"],
-       [(s_user(b.user), Raw("RANDOM_BYTES(12)"), Raw("RANDOM_BYTES(16)"), Raw("CONCAT(RANDOM_BYTES(1024), RANDOM_BYTES(1024))"),
+       [(s_user(b.user), Raw("UNHEX(LEFT(MD5(RAND()), 24))"), Raw("UNHEX(MD5(RAND()))"), Raw("UNHEX(REPEAT(MD5(RAND()), 128))"),
          b.key, b.modelo, b.quando) for b in biometrias],
        "biometria facial obrigatoria; embeddings simulados com bytes aleatorios")
 insert("termo_uso", ["versao", "conteudo", "publicado_em"], [(t.versao, t.conteudo, t.publicado) for t in TERMOS], "termos de uso")

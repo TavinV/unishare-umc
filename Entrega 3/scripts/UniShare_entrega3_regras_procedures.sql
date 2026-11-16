@@ -11,6 +11,7 @@
 -- 11261103039  Otavio Vinicius Flauzino de Souza
 -- 11261102968  Roberta da Silva Ribeiro
 -- 11251103799  Sara Santos Rodrigues de Lima
+-- 11261103131  Thiago Araujo Cordeiro da Silva
 --
 -- Pre-requisito: banco unishare criado e povoado pelo script da Entrega 2.
 --

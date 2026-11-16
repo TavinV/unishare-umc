@@ -23,9 +23,9 @@ var TAB = {
   categoria:    { g:[0,3], f:[["id_categoria","INT UNSIGNED","PK"],["nome","VARCHAR(60)","UQ"]] },
   dano:         { g:[1,3], f:[["id_dano","INT UNSIGNED","PK"],["descricao","VARCHAR(500)"],["data_hora","DATETIME"],["status_andamento","VARCHAR(10)"],["resolvido_em","DATETIME","NULL"],["id_equipamento","INT UNSIGNED","FK"],["id_usuario_relator","INT UNSIGNED","FK"],["id_reserva","INT UNSIGNED","FK NULL"]] },
   disponibilizacao: { g:[2,3], f:[["id_disponibilizacao","INT UNSIGNED","PK"],["modalidade","VARCHAR(10)"],["valor_diaria","DECIMAL(10,2)"],["data_inicio","DATE"],["data_fim","DATE"],["prazo_maximo_dias","SMALLINT UNSIGNED","NULL"],["criado_em","DATETIME"],["id_equipamento","INT UNSIGNED","FK"]] },
-  retirada:     { g:[3,3], f:[["id_retirada","INT UNSIGNED","PK"],["data_hora","DATETIME"],["estado_conservacao","VARCHAR(10)"],["observacao","VARCHAR(500)","NULL"],["codigo_comprovante","CHAR(13)","UQ"],["id_reserva","INT UNSIGNED","FK UQ"],["id_biometria","INT UNSIGNED","FK"]] },
+  retirada:     { g:[3,3], f:[["id_retirada","INT UNSIGNED","PK"],["data_hora","DATETIME"],["estado_conservacao","VARCHAR(10)"],["observacao","VARCHAR(500)","NULL"],["codigo_comprovante","CHAR(11)","UQ"],["id_reserva","INT UNSIGNED","FK UQ"],["id_biometria","INT UNSIGNED","FK"]] },
   foto_dano:    { g:[1,4], f:[["id_foto","INT UNSIGNED","PK"],["url_arquivo","VARCHAR(255)"],["formato","VARCHAR(3)"],["tamanho_bytes","INT UNSIGNED"],["enviada_em","DATETIME"],["id_dano","INT UNSIGNED","FK"]] },
-  devolucao:    { g:[3,4], f:[["id_devolucao","INT UNSIGNED","PK"],["data_hora","DATETIME"],["estado_conservacao","VARCHAR(10)"],["itens_faltantes","VARCHAR(255)","NULL"],["observacao","VARCHAR(500)","NULL"],["codigo_comprovante","CHAR(13)","UQ"],["id_retirada","INT UNSIGNED","FK UQ"]] }
+  devolucao:    { g:[3,4], f:[["id_devolucao","INT UNSIGNED","PK"],["data_hora","DATETIME"],["estado_conservacao","VARCHAR(10)"],["itens_faltantes","VARCHAR(255)","NULL"],["observacao","VARCHAR(500)","NULL"],["codigo_comprovante","CHAR(11)","UQ"],["id_retirada","INT UNSIGNED","FK UQ"]] }
 };
 
 // [filha, campo, pai, card. lado pai, card. lado filha, lado filha, desloc., lado pai, desloc., vias (grade [gx,gy,dx,dy])]

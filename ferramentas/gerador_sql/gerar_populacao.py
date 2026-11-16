@@ -717,9 +717,9 @@ ordena(logs, lambda o: (o.quando, o.tipo != "LOGIN"))
 for ac in aceites:
     ac.id = ac.termo.id
 for i, r in enumerate(retiradas, 1):
-    r.cod = "RET-2026-%04d" % i
+    r.cod = "RET2026%04d" % i
 for i, d_ in enumerate(devolucoes, 1):
-    d_.cod = "DEV-2026-%04d" % i
+    d_.cod = "DEV2026%04d" % i
 
 
 def q(v):

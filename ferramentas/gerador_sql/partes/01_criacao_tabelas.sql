@@ -229,7 +229,7 @@ CREATE TABLE retirada (
   data_hora          DATETIME     NOT NULL,
   estado_conservacao VARCHAR(10)  NOT NULL,
   observacao         VARCHAR(500) NULL,
-  codigo_comprovante CHAR(13)     NOT NULL,
+  codigo_comprovante CHAR(11)     NOT NULL,
   id_reserva         INT UNSIGNED NOT NULL,
   id_biometria       INT UNSIGNED NOT NULL,
   CONSTRAINT pk_retirada PRIMARY KEY (id_retirada),
@@ -237,6 +237,7 @@ CREATE TABLE retirada (
   CONSTRAINT uq_retirada_comprovante UNIQUE (codigo_comprovante),
   CONSTRAINT fk_retirada_reserva FOREIGN KEY (id_reserva) REFERENCES reserva (id_reserva),
   CONSTRAINT fk_retirada_biometria FOREIGN KEY (id_biometria) REFERENCES biometria_facial (id_biometria),
+  CONSTRAINT ck_retirada_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11 AND codigo_comprovante NOT REGEXP '[^A-Z0-9]'),
   CONSTRAINT ck_retirada_estado CHECK (estado_conservacao IN ('NOVO', 'OTIMO', 'BOM', 'REGULAR', 'RUIM'))
 );
 
@@ -246,12 +247,13 @@ CREATE TABLE devolucao (
   estado_conservacao VARCHAR(10)  NOT NULL,
   itens_faltantes    VARCHAR(255) NULL,
   observacao         VARCHAR(500) NULL,
-  codigo_comprovante CHAR(13)     NOT NULL,
+  codigo_comprovante CHAR(11)     NOT NULL,
   id_retirada        INT UNSIGNED NOT NULL,
   CONSTRAINT pk_devolucao PRIMARY KEY (id_devolucao),
   CONSTRAINT uq_devolucao_retirada UNIQUE (id_retirada),
   CONSTRAINT uq_devolucao_comprovante UNIQUE (codigo_comprovante),
   CONSTRAINT fk_devolucao_retirada FOREIGN KEY (id_retirada) REFERENCES retirada (id_retirada),
+  CONSTRAINT ck_devolucao_codigo CHECK (CHAR_LENGTH(codigo_comprovante) = 11 AND codigo_comprovante NOT REGEXP '[^A-Z0-9]'),
   CONSTRAINT ck_devolucao_estado CHECK (estado_conservacao IN ('NOVO', 'OTIMO', 'BOM', 'REGULAR', 'RUIM'))
 );
 

@@ -536,9 +536,9 @@ CREATE PROCEDURE sp_retirada_inserir(
   IN p_id_reserva INT UNSIGNED, IN p_id_biometria INT UNSIGNED, IN p_estado_conservacao VARCHAR(10), IN p_observacao VARCHAR(500))
 BEGIN
   DECLARE v_seq INT;
-  SELECT COUNT(*) + 1 INTO v_seq FROM retirada WHERE codigo_comprovante LIKE CONCAT('RET-', YEAR(NOW()), '-%');
+  SELECT COUNT(*) + 1 INTO v_seq FROM retirada WHERE codigo_comprovante LIKE CONCAT('RET', YEAR(NOW()), '%');
   INSERT INTO retirada (data_hora, estado_conservacao, observacao, codigo_comprovante, id_reserva, id_biometria)
-  VALUES (NOW(), p_estado_conservacao, p_observacao, CONCAT('RET-', YEAR(NOW()), '-', LPAD(v_seq, 4, '0')), p_id_reserva, p_id_biometria);
+  VALUES (NOW(), p_estado_conservacao, p_observacao, CONCAT('RET', YEAR(NOW()), LPAD(v_seq, 4, '0')), p_id_reserva, p_id_biometria);
   SELECT LAST_INSERT_ID() AS id_retirada;
 END //
 
@@ -564,9 +564,9 @@ CREATE PROCEDURE sp_devolucao_inserir(
   IN p_id_retirada INT UNSIGNED, IN p_estado_conservacao VARCHAR(10), IN p_itens_faltantes VARCHAR(255), IN p_observacao VARCHAR(500))
 BEGIN
   DECLARE v_seq INT;
-  SELECT COUNT(*) + 1 INTO v_seq FROM devolucao WHERE codigo_comprovante LIKE CONCAT('DEV-', YEAR(NOW()), '-%');
+  SELECT COUNT(*) + 1 INTO v_seq FROM devolucao WHERE codigo_comprovante LIKE CONCAT('DEV', YEAR(NOW()), '%');
   INSERT INTO devolucao (data_hora, estado_conservacao, itens_faltantes, observacao, codigo_comprovante, id_retirada)
-  VALUES (NOW(), p_estado_conservacao, p_itens_faltantes, p_observacao, CONCAT('DEV-', YEAR(NOW()), '-', LPAD(v_seq, 4, '0')), p_id_retirada);
+  VALUES (NOW(), p_estado_conservacao, p_itens_faltantes, p_observacao, CONCAT('DEV', YEAR(NOW()), LPAD(v_seq, 4, '0')), p_id_retirada);
   SELECT LAST_INSERT_ID() AS id_devolucao;
 END //
 

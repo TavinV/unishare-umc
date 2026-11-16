@@ -88,6 +88,21 @@ unishare/
 
 O MR completo, em imagem e em texto, está em [`Entrega 2/modelo_logico`](Entrega%202/modelo_logico).
 
+### Dados sem máscara
+Nenhum dado é guardado com máscara ou formatação. Constraints `CHECK` garantem que estes campos contêm apenas
+letras e dígitos, no tamanho certo:
+
+| Campo | Tamanho | Exemplo armazenado |
+|---|---|---|
+| CPF | 11 dígitos | `52998224725` |
+| CNPJ | 14 dígitos | `52418637000104` |
+| Telefone | 10 ou 11 dígitos | `11991234567` |
+| Matrícula | 11 dígitos | `11240001000` |
+| Número do documento | 5 a 20 caracteres | `123456789` |
+| Código do comprovante | 11 caracteres | `RET20260001` |
+
+A formatação (pontos, traços, parênteses) fica a cargo da aplicação, apenas na exibição.
+
 ## Como executar
 
 1. Suba um MySQL 8.4. Com Docker, rode na raiz do repositório:

@@ -39,7 +39,7 @@ unishare/
 │   ├── modelo_logico/
 │   └── scripts/              UniShare_script_completo.sql
 ├── Entrega 3/                Regra de negócio e procedures de CRUD com exclusão lógica
-│   └── scripts/              UniShare_entrega3_regras_procedures.sql e roteiro de testes
+│   └── scripts/              UniShare_entrega3_regras_procedures.sql
 ├── consultas/                Consultas de negócio e checagens de consistência dos dados
 ├── ferramentas/              Geradores dos diagramas (brModelo) e do povoamento
 ├── docker-compose.yml        MySQL 8.4 local para testes
@@ -76,13 +76,8 @@ unishare/
 | `vw_notificacoes_nao_lidas` | Quantidade de notificações não lidas por usuário |
 
 ### Entrega 3 – Regra de negócio e procedures
-- **Regra de negócio RN24/RN25**: aprovação de solicitação sem conflito de reservas. A implementação combina:
-  - **triggers**, que impedem duas reservas aprovadas com períodos sobrepostos para o mesmo equipamento;
-  - **procedure com transação** `sp_aprovar_solicitacao`. Ela bloqueia os registros, aprova a solicitação e cria a reserva. Também recusa automaticamente as solicitações pendentes conflitantes, cancela os pagamentos delas, notifica os alunos e registra a auditoria. Em caso de erro, faz `ROLLBACK`.
-- **Procedures de inserção, atualização e exclusão lógica** (`sp_<tabela>_inserir`, `_atualizar` e `_excluir`) para as 18 tabelas que não são de parâmetro.
-  - A exclusão lógica usa as colunas `ativo` e `excluido_em`.
-  - As tabelas de parâmetro (`instituicao`, `curso`, `categoria` e `termo_uso`) não têm procedures.
-- **Roteiro de testes** com os casos válidos e os casos que o banco deve barrar.
+- **Regra de negócio RN24**: não pode haver duas reservas aprovadas do mesmo equipamento com períodos sobrepostos. Implementada na procedure `sp_aprovar_solicitacao` com transação: aprova a solicitação, cria a reserva e, se houver conflito, faz `ROLLBACK` e devolve a mensagem em um parâmetro OUT.
+- **54 procedures de CRUD** (`sp_<tabela>_inserir`, `_atualizar` e `_excluir`) para as 18 tabelas que não são de parâmetro, com exclusão lógica pelas colunas `ativo` e `excluido_em`. As tabelas `instituicao`, `curso`, `categoria` e `termo_uso` não têm procedures.
 
 ## Modelo de dados
 
@@ -117,7 +112,7 @@ A formatação (pontos, traços, parênteses) fica a cargo da aplicação, apena
 3. Abra `Entrega 2/scripts/UniShare_script_completo.sql` e execute como **script** (**Alt+X**), não como
    comando único (Ctrl+Enter).
 4. Em seguida, execute `Entrega 3/scripts/UniShare_entrega3_regras_procedures.sql`.
-5. Opcionalmente, rode `Entrega 3/scripts/testes_entrega3.sql` e as consultas da pasta `consultas/`.
+5. Opcionalmente, rode as consultas da pasta `consultas/`.
 
 > Os scripts de criação começam com `CREATE DATABASE unishare`. Para recriar o banco do zero, execute antes
 > `DROP DATABASE unishare;`.
